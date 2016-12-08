@@ -21,7 +21,7 @@ socket.on("message", function (message) {   // listen if arrived a new message f
     //take the current local time, convert from binary format into utc and use a hour format 
     var timestamp = moment().local().utc(message.timestamp).format("h:mm a");   
 
-    var $messages = jQuery(".messages"); 
+    var $messages = jQuery("#messages"); 
     
     $messages.append("<p><strong>" + message.name + " - " + timestamp + "</strong></p>"); //insert message received into .messages element of the view
 
@@ -31,7 +31,7 @@ socket.on("message", function (message) {   // listen if arrived a new message f
 })
 
 var $form = jQuery(".form");    //take a reference of form element
-var $newMessage = $form.find("input[class=message]"); // find a element into form element 
+var $newMessage = $form.find("input[id=message]"); // find a element into form element 
 
 
 //send a message at the server
