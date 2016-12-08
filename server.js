@@ -23,6 +23,11 @@ io.on("connection", function (socket) { //listen the connection request from the
 
         console.log("Received a message");
 
+        if (message.text === "@currentUsers") {
+
+            showAllUsers(socket);
+        }
+
         message.timestamp =  moment().valueOf();
 
         io.to(clientInfo[socket.id].room).emit("message", message);    //send the message received at all client connected
@@ -41,6 +46,21 @@ io.on("connection", function (socket) { //listen the connection request from the
             text: request.name + " has joined into this room!"
         });
     })
+
+    // for show wich users has connected into room of the user that has sended the message @currentUsers
+    function showAllUsers(socket) {
+
+        var infoCurrentUser = clientInfo[socket.id];
+
+        var userConnected = [];
+
+        Object.keys(clientInfo).forEach(function (socketId) {
+            if (infoCurrentUser.room === socketId.room) {
+                userConnected.push(socketId.name);
+            }
+            console.log(userConnected);
+        })
+    }
 });
 
 
