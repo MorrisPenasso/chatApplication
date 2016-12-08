@@ -1,19 +1,42 @@
 ﻿<html>
 <head>
     <title>Chat application</title>
+    <link rel="stylesheet" href="/styles/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-    <form action="chat.html">
-        <h1>Welcome into chat application!</h1>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 well">
+                    <form action="chat.html">
+                        <h1>Welcome into chat application!</h1>
 
-        <label>Insert your name</label>
-        <input type="text" name="name" />
-        
-        <label>Insert the room</label>
-        <input type="text" name="room" />
+                        <div class="form-group">
+                            <label>Insert your name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                                <input type="text" class="form-control" name="name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Insert the room</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                </span>
+                                <input type="text" class="form-control" name="room" />
+                            </div>
+                        </div>
+                        
 
-        <input type="submit" value="Join"/>
-    </form>
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Join" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
