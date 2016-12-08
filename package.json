@@ -1,0 +1,17 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "A simple chat application with NodeJs and AngularJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Morris Penasso",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "moment": "^2.17.1",
+    "socket.io": "^1.7.1"
+  }
+}
