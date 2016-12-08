@@ -3,22 +3,17 @@
     <title>Chat application</title>
 </head>
 <body>
-    
-    <h1>Hello!!</h1>
+    <form action="chat.html">
+        <h1>Welcome into chat application!</h1>
 
-    <div class="messages"></div>
-
-    <form class="form">
+        <label>Insert your name</label>
+        <input type="text" name="name" />
         
-        <input type="text" class="message"/>
-        <input type="submit" value="Send message"/>
+        <label>Insert the room</label>
+        <input type="text" name="room" />
+
+        <input type="submit" value="Join"/>
     </form>
-
-
-    <script src="/scripts/jquery-3.1.1.min.js"></script>
-    <script src="/scripts/moment.js"></script>
-    <script src="/scripts/socket.js"></script>
-    <script src="/scripts/app.js"></script>
 
 </body>
 </html>
