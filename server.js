@@ -15,7 +15,8 @@ io.on("connection", function (socket) { //listen the connection request from the
 
     socket.emit("message", {
         name: "System",
-        text: "<p><strong>Welcome into chat application!</strong></p>"
+        text: "<strong>Welcome into chat application!</strong>",
+        timestamp: moment().valueOf()
     });
 
     socket.on("message", function (message) {   // listen on the message event for received the new messages from the clients
@@ -23,7 +24,8 @@ io.on("connection", function (socket) { //listen the connection request from the
         console.log("Received a message");
 
         io.emit("message", {    //send the message received at all client connected
-            text: message.text
+            text: message.text,
+            timestamp: moment().valueOf()
         })
     })
 });

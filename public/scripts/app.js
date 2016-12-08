@@ -9,9 +9,12 @@ socket.on("connect", function () {
 
 socket.on("message", function (message) {   // listen if arrived a new message from the server
 
+    //take the current local time, convert from binary format into utc and use a hour format 
+    var timestamp = moment().local().utc(message.timestamp).format("h:mm a");   
+
     var $messages = jQuery(".messages");    
 
-    $messages.append("<p>" + message.text + "</p>"); //insert message received into .messages element of the view
+    $messages.append("<p>" + message.text + " - " + timestamp +  "</p>"); //insert message received into .messages element of the view
 
 })
 
