@@ -8,6 +8,7 @@ var io = require("socket.io")(http);
 // send at the client all files into public folder
 app.use(express.static(__dirname + "/public"));
 
+var clientInfo = {};
 
 io.on("connection", function (socket) { //listen the connection request from the clients
 
@@ -24,16 +25,23 @@ io.on("connection", function (socket) { //listen the connection request from the
 
         message.timestamp =  moment().valueOf();
 
-        io.emit("message", message);    //send the message received at all client connected
+        io.to(clientInfo[socket.id].room).emit("message", message);    //send the message received at all client connected
+    })
+
+    //for sending at all users that partecipate in a room that a new user it has arrived
+    socket.on("joinRoom", function (request) {
+
+        // insert into client info object ( into object id of array socket ) the object resquest that contain id, name and room
+        clientInfo[socket.id] = request;    
+
+        socket.join(request.room);  // call socket and insert a new room
+
+        socket.broadcast.to(request.room).emit("message", { //send the message at all users into current room
+            name: "System",
+            text: request.name + " has joined into this room!"
+        });
     })
 });
-
-
-
-
-
-
-
 
 
 http.listen(port, function () {

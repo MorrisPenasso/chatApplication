@@ -10,6 +10,10 @@ socket.on("connect", function () {
 
     console.log("Client connected");
 
+    socket.emit("joinRoom", {
+        name: name,
+        room: room
+    })
 });
 
 socket.on("message", function (message) {   // listen if arrived a new message from the server
@@ -37,7 +41,8 @@ $form.on("submit", function (event) {
 
     socket.emit("message", {
         name: name,
-        text: $newMessage.val() //send a new message at the server wit the value of input element into the view
+        text: $newMessage.val(), //send a new message at the server wit the value of input element into the view
+        timestamp: moment().valueOf()
     })
     $newMessage.val("");
 })
