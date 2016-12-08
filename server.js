@@ -19,6 +19,21 @@ io.on("connection", function (socket) { //listen the connection request from the
         text: "<p><strong>Welcome into chat application!</strong></p>"
     });
 
+    socket.on("disconnect", function () {
+
+        var currentUser = clientInfo[socket.id];
+
+        socket.leave(clientInfo[currentUser.room]); //the sokect leave current room for a specific user
+
+        socket.broadcast.to(currentUser.room).emit("message", {
+            name: "System",
+            text: currentUser.name + " has left!",
+            timestamp: moment().valueOf()
+        })
+
+        delete currentUser;
+    })
+
     socket.on("message", function (message) {   // listen on the message event for received the new messages from the clients
 
         console.log("Received a message");
@@ -50,15 +65,24 @@ io.on("connection", function (socket) { //listen the connection request from the
     // for show wich users has connected into room of the user that has sended the message @currentUsers
     function showAllUsers(socket) {
 
-        var infoCurrentUser = clientInfo[socket.id];
+        var infoCurrentUser = clientInfo[socket.id];    // save current informations of user that hase sended this message ( name, room )
 
         var userConnected = [];
 
         Object.keys(clientInfo).forEach(function (socketId) {
-            if (infoCurrentUser.room === socketId.room) {
-                userConnected.push(socketId.name);
+
+            var infoUser = clientInfo[socketId];
+
+            if (infoCurrentUser.room === infoUser.room) {
+                userConnected.push(infoUser.name);
             }
-            console.log(userConnected);
+        })
+
+        socket.emit("message", {
+            name: "System",
+            text: userConnected + " are connected",
+            timestamp: moment().valueOf()
+
         })
     }
 });
